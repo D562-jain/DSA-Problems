@@ -1,0 +1,49 @@
+/*T.C=O(N)
+Ist Approach
+1. If array is even add element at i and -element at i+1
+2. If array is odd at 0 at n-1 position
+Psuedocode:
+while(i+1<n){
+    arr[i]=elem;
+    arr[i+1]=-elem;
+    elem++;
+    i+=2
+}
+return arr;
+CODE:
+        vector<int>result(n);
+        int start=1;
+        int i=0;
+        while(i+1<n){
+            result[i]=start;
+            result[i+1]=-start;
+            i+=2;
+            start++;
+        }
+        return result;
+
+IInd Approach-Two pointer
+while(i<j){
+    arr[i]=elem;
+    arr[j]=-elem;
+}
+return arr*/
+
+class Solution {
+public:
+    vector<int> sumZero(int n) {
+        //IInd Approach
+        vector<int>result(n);
+        int i=0;
+        int j=n-1;
+        int start=1;
+        while(i<j){
+            result[i]=start;
+            result[j]=-start;
+            start++;
+            i++;
+            j--;
+        }
+        return result;
+    }
+};
