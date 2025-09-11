@@ -1,0 +1,65 @@
+/*Thought Process
+##A-Z=>65-90
+##a-z=97-122
+
+Approach-1-O(nlogn),O(n)
+1.Seperate string=sort
+2.Put those vowels in asc order
+CODE:
+class Solution {
+public:
+    bool isVowel(char ch){
+        ch=tolower(ch);
+        return (ch=='a' || ch=='e' || ch=='i' || ch=='o' ||ch=='u');
+    }
+    string sortVowels(string s) {
+        string temp;
+        for(char &ch:s){
+            if(isVowel(ch)){
+                temp.push_back(ch);
+            }
+        }
+        sort(begin(temp), end(temp));
+        int j=0;
+        for(int i=0; i<s.length(); i++){
+            if(isVowel(s[i])){
+                s[i]=temp[j];
+                j++;
+            }
+        }
+        return s;
+    }
+};
+
+Approach-2-Counting Sort
+1.map<vowel,freq>in s
+2.s->i=0 to i<n
+cons=i++
+vowel=pick smallest available vowel and update freq
+*/
+class Solution {
+public:
+    bool isVowel(char ch){
+        ch=tolower(ch);
+        return (ch=='a' || ch=='e' || ch=='i' || ch=='o' ||ch=='u');
+    }
+    string sortVowels(string s) {
+        unordered_map<char,int>mp;
+        for(char &ch:s){
+            if(isVowel(ch)){
+                mp[ch]++;
+            }
+        }
+        string temp="AEIOUaeiou";
+        int j=0;
+        for(int i=0; i<s.length(); i++){
+            if(isVowel(s[i])){
+                //vowel=temp[j];
+                while(mp[temp[j]]==0) j++;
+                s[i]=temp[j];
+                mp[temp[j]]--;
+            }
+        }
+        return s;
+    }
+};
