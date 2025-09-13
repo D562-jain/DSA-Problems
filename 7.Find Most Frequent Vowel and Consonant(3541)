@@ -1,0 +1,25 @@
+/*T.C=O(N), S.C=O(1)*/
+class Solution {
+public:
+    bool isVowel(char ch){
+        return (ch=='a' || ch=='e' || ch=='i' || ch=='o' ||ch=='u');
+    }
+    int maxFreqSum(string s) {
+        unordered_map<char, int>vowelCount;
+        unordered_map<char, int>consonantCount;
+        for(char ch:s){
+            if(isVowel(ch)) vowelCount[ch]++;
+            else consonantCount[ch]++;
+        }
+        int maxVowel=0;
+        for(auto& it: vowelCount){
+            maxVowel=max(maxVowel, it.second);
+        }
+        int maxConsonant=0;
+        for(auto& it: consonantCount){
+            maxConsonant=max(maxConsonant, it.second);
+        }
+        return maxVowel+maxConsonant;
+
+    }
+};
