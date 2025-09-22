@@ -1,0 +1,44 @@
+/*Approach-1: Take array=2*maxFreq->because constraints are small.
+T.C=O(n+n), S.C=O(101)->Two Pass
+Code:
+class Solution {
+public:
+    int maxFrequencyElements(vector<int>& nums) {
+        vector<int>Count(101); //unordered_map<int,int>mp;
+        int maxFreq=0;
+        for(int &num: nums){
+            Count[num]++; //increasing the freq of num
+            maxFreq=max(maxFreq, Count[num]);
+        }
+        int result=0;
+        for(int i=0; i<101; i++){
+            if(Count[i]==maxFreq){
+                result+=maxFreq;
+            }
+        }
+        return result;
+        //return std::count(begin(count), end(count), maxFreq)*maxFreq;->c++ stl
+    }
+};
+
+Approach-2(One Pass)-O(n),O(1)*/
+class Solution {
+public:
+    int maxFrequencyElements(vector<int>& nums) {
+        vector<int>Count(101); //unordered_map<int,int>mp;
+        int maxFreq=0;
+        int total=0;
+        for(int &num: nums){
+            Count[num]++; //increasing the freq of num
+            int freq=Count[num];
+            if(freq>maxFreq){
+                maxFreq=freq;
+                total=maxFreq;
+            }
+            else if(freq==maxFreq){
+                total+=maxFreq;
+            }
+        }
+        return total;
+    }
+};
